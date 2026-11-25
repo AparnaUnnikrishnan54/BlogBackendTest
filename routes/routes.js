@@ -13,5 +13,6 @@ router.post('/blog/add',authMiddleware,blogController.createBlogController)
 router.get('/blog/fetchall',authMiddleware,blogController.getAllBlogController)
 router.put('/blog/edit/:id',authMiddleware,blogController.updateBlogController)
 router.delete('/blog/remove/:id',authMiddleware,blogController.deleteBlogController)
+router.post('/blog/:id/comments', authMiddleware, blogController.addCommentController)
 
 module.exports=router

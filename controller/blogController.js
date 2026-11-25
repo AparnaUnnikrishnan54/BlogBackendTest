@@ -63,3 +63,27 @@ exports.deleteBlogController=async(req,res)=>{
     }
 }     
         
+
+exports.addCommentController=async(req,res)=>{
+    try {
+       const {id}=req.params
+       const {text}=req.body
+       const blog=await blogModel.findById(id)
+       if(!blog){
+        return res.status(404).json("blog not found")
+       }
+       blog.comments.push({
+            text,
+            user: req.userId
+        })
+        await blog.save()
+        res.status(200).json({
+            message:'comment added successfully',
+            blog
+        })
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}  
+
+        
